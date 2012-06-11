@@ -9,8 +9,23 @@ public class FibLib {
 		return fibJ(n-1)+fibJ(n-2);
 	}
 	
+	// Java iterative
+	public static long fibJI(long n) {
+        long previous = -1;
+        long result = 1;
+        for (long i = 0; i <= n; i++) {
+            long sum = result + previous;
+            previous = result;
+            result = sum;
+        }
+        return result;
+    }
+	
 	// Native recursive version
 	public static native long fibN(long n);
+	
+	// Native iterative
+	public static native long fibNI(long n);
 	
 	static {
 		System.loadLibrary("fib");
