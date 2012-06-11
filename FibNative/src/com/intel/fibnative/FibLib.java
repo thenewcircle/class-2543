@@ -11,4 +11,8 @@ public class FibLib {
 	
 	// Native recursive version
 	public static native long fibN(long n);
+	
+	static {
+		System.loadLibrary("fib");
+	}
 }
