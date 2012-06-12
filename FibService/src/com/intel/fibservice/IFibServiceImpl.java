@@ -1,7 +1,6 @@
 package com.intel.fibservice;
 
 import android.os.RemoteException;
-
 import com.intel.fibcommon.IFibService;
 
 public class IFibServiceImpl extends IFibService.Stub {
