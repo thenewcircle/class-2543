@@ -9,5 +9,5 @@ interface IFibService {
 	long fibN(long n);
 	long fibNI(long n);
 	
-	Response fib(Request request);
+	Response fib(in Request request);
 }
