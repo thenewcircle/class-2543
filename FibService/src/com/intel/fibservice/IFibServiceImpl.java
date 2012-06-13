@@ -1,5 +1,7 @@
 package com.intel.fibservice;
 
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.RemoteException;
 
 import com.intel.fibcommon.IFibListener;
@@ -9,8 +11,19 @@ import com.intel.fibcommon.Response;
 import com.intel.fibnative.FibLib;
 
 public class IFibServiceImpl extends IFibService.Stub {
+	private Context context;
+
+	public IFibServiceImpl(Context context) {
+		this.context = context;
+	}
 
 	public long fibJ(long n) throws RemoteException {
+		if (context
+				.checkCallingOrSelfPermission("com.intel.fibservice.PREMIUM_ACCESS") != PackageManager.PERMISSION_GRANTED
+				&& n > 30) {
+			throw new SecurityException(
+					"Need com.intel.fibservice.PREMIUM_ACCESS permission");
+		}
 		return FibLib.fibJ(n);
 	}
 
@@ -32,7 +45,7 @@ public class IFibServiceImpl extends IFibService.Stub {
 
 		switch (request.getAlgorithm()) {
 		case Request.JAVA_RECURSIVE:
-			response.setResult(fibJ(request.getN()));
+			response.setResult(FibLib.fibJ(request.getN()));
 			break;
 		case Request.JAVA_ITERATIVE:
 			response.setResult(fibJI(request.getN()));
@@ -51,10 +64,18 @@ public class IFibServiceImpl extends IFibService.Stub {
 
 	public void asyncFib(Request request, IFibListener listener)
 			throws RemoteException {
+		if (context
+				.checkCallingOrSelfPermission("com.intel.fibservice.PREMIUM_ACCESS") != PackageManager.PERMISSION_GRANTED
+				&& request.getAlgorithm() == Request.JAVA_RECURSIVE
+				&& request.getN() > 30) {
+			throw new SecurityException(
+					"Need com.intel.fibservice.PREMIUM_ACCESS permission");
+		}
+
 		Job job = new Job(request, listener);
 		job.start();
-//		Response response = fib(request); // potentially long task
-//		listener.onResponse(response);
+		// Response response = fib(request); // potentially long task
+		// listener.onResponse(response);
 
 	}
 

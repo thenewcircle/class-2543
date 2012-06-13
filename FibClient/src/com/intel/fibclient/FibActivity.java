@@ -36,9 +36,12 @@ public class FibActivity extends Activity {
 		long n = Long.parseLong(input.getText().toString());
 
 		fibManager.asyncFib(new Request(Request.JAVA_RECURSIVE, n), listener);
-		fibManager.asyncFib(new Request(Request.JAVA_ITERATIVE, n), listener);
-		fibManager.asyncFib(new Request(Request.NATIVE_RECURSIVE, n), listener);
-		fibManager.asyncFib(new Request(Request.NATIVE_ITERATIVE, n), listener);
+		output.append("\n" +fibManager.fib(new Request(Request.JAVA_RECURSIVE, n)));
+		output.append("\n" +fibManager.fibJ(n));
+		
+//		fibManager.asyncFib(new Request(Request.JAVA_ITERATIVE, n), listener);
+//		fibManager.asyncFib(new Request(Request.NATIVE_RECURSIVE, n), listener);
+//		fibManager.asyncFib(new Request(Request.NATIVE_ITERATIVE, n), listener);
 	}
 	
 	/** Async listener called when asyncFib is done, runs on Binder thread. */

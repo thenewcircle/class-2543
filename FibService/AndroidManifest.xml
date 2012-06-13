@@ -9,11 +9,17 @@
     <permission
         android:name="com.intel.fibservice.ACCESS"
         android:label="Access to Fibonacci Service"
-        android:protectionLevel="signature" >
+        android:protectionLevel="dangerous" >
+    </permission>
+    <permission
+        android:name="com.intel.fibservice.PREMIUM_ACCESS"
+        android:label="Access to PREMIUM Fibonacci Service"
+        android:protectionLevel="dangerous" >
     </permission>
 
     <application>
-        <service android:name=".FibService"
+        <service
+            android:name=".FibService"
             android:permission="com.intel.fibservice.ACCESS" >
             <intent-filter>
                 <action android:name="com.intel.fibcommon.IFibService" />
