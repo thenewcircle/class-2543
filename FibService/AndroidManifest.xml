@@ -6,16 +6,19 @@
 
     <uses-sdk android:minSdkVersion="15" />
 
+    <permission
+        android:name="com.intel.fibservice.ACCESS"
+        android:label="Access to Fibonacci Service"
+        android:protectionLevel="signature" >
+    </permission>
+
     <application>
-        
-        <service android:name=".FibService">
-            
+        <service android:name=".FibService"
+            android:permission="com.intel.fibservice.ACCESS" >
             <intent-filter>
-                <action android:name="com.intel.fibcommon.IFibService"/>
+                <action android:name="com.intel.fibcommon.IFibService" />
             </intent-filter>
-            
         </service>
-        
     </application>
 
 </manifest>
