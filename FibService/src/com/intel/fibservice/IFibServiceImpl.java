@@ -29,16 +29,16 @@ public class IFibServiceImpl extends IFibService.Stub {
 		long start = System.currentTimeMillis();
 
 		switch (request.getAlgorithm()) {
-		case Request.JAVA_ITERATIVE:
+		case Request.JAVA_RECURSIVE:
 			response.setResult(fibJ(request.getN()));
 			break;
-		case Request.JAVA_RECURSIVE:
+		case Request.JAVA_ITERATIVE:
 			response.setResult(fibJI(request.getN()));
 			break;
-		case Request.NATIVE_ITERATIVE:
+		case Request.NATIVE_RECURSIVE:
 			response.setResult(fibN(request.getN()));
 			break;
-		case Request.NATIVE_RECURSIVE:
+		case Request.NATIVE_ITERATIVE:
 			response.setResult(fibNI(request.getN()));
 			break;
 		}

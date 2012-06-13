@@ -17,6 +17,11 @@ public class Response implements Parcelable {
 		this(0, 0);
 	}
 
+	@Override
+	public String toString() {
+		return String.format("fib() = %d (%d ms)", result, time);
+	}
+
 	// --- Parcelable methods ---
 	public Response(Parcel parcel) {
 		this(parcel.readLong(), parcel.readLong());

@@ -7,7 +7,10 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
+
 import com.intel.fibcommon.IFibService;
+import com.intel.fibcommon.Request;
+import com.intel.fibcommon.Response;
 
 public class FibManager {
 	private static final String TAG = FibManager.class.getSimpleName();
@@ -59,6 +62,14 @@ public class FibManager {
 			Log.e(TAG, "Failed to execute", e);
 		}
 		return -1;
+	}
+	public Response fib(Request request) {
+		try {
+			return fibService.fib(request);
+		} catch (RemoteException e) {
+			Log.e(TAG, "Failed to execute", e);
+			return null;
+		}
 	}
 
 	

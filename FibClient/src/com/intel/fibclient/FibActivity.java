@@ -1,19 +1,12 @@
 package com.intel.fibclient;
 
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
-import android.os.RemoteException;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.intel.fibcommon.IFibService;
+import com.intel.fibcommon.Request;
 
 public class FibActivity extends Activity {
 	private EditText input;
@@ -29,7 +22,7 @@ public class FibActivity extends Activity {
 		// Setting up the UI
 		input = (EditText) findViewById(R.id.input);
 		output = (TextView) findViewById(R.id.output);
-		
+
 		fibManager = new FibManager(this);
 	}
 
@@ -37,29 +30,22 @@ public class FibActivity extends Activity {
 	public void onClick(View v) {
 		long n = Long.parseLong(input.getText().toString());
 
-		// Java recursive
-		long start = System.currentTimeMillis();
-		long fibJ = fibManager.fibJ(n);
-		long timeJ = System.currentTimeMillis() - start;
-		output.append(String.format("\nfibJ(%d)=%d (%d ms)", n, fibJ, timeJ));
+		output.append("\nJava recursive: "
+				+ (CharSequence) fibManager.fib(new Request(
+						Request.JAVA_RECURSIVE, n)).toString() );
 
-		// Native recursive
-		start = System.currentTimeMillis();
-		long fibN = fibManager.fibN(n);
-		long timeN = System.currentTimeMillis() - start;
-		output.append(String.format("\nfibN(%d)=%d (%d ms)", n, fibN, timeN));
+		output.append("\nJava iterative: "
+				+ (CharSequence) fibManager.fib(new Request(
+						Request.JAVA_ITERATIVE, n)).toString() );
 
-		// Java iterative
-		start = System.currentTimeMillis();
-		long fibJI = fibManager.fibJI(n);
-		long timeJI = System.currentTimeMillis() - start;
-		output.append(String.format("\nfibJI(%d)=%d (%d ms)", n, fibJI, timeJI));
+		output.append("\nNative recursive: "
+				+ (CharSequence) fibManager.fib(new Request(
+						Request.NATIVE_RECURSIVE, n)).toString() );
 
-		// Native iterative
-		start = System.currentTimeMillis();
-		long fibNI = fibManager.fibNI(n);
-		long timeNI = System.currentTimeMillis() - start;
-		output.append(String.format("\nfibNI(%d)=%d (%d ms)", n, fibNI, timeNI));
+		output.append("\nNative iterative: "
+				+ (CharSequence) fibManager.fib(new Request(
+						Request.NATIVE_ITERATIVE, n)).toString() );
+
 	}
 
 }
