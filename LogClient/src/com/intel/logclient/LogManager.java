@@ -9,6 +9,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.intel.logcommon.ILogService;
+import com.intel.logcommon.LogMessage;
 
 public class LogManager {
 
@@ -44,6 +45,14 @@ public class LogManager {
 			} catch (RemoteException e) {
 				Log.e(TAG, "Can't log!", e);
 			}
+		}
+	}
+	
+	public void loggit(LogMessage message) {
+		try {
+			logService.loggit(message);
+		} catch (RemoteException e) {
+			Log.e(TAG, "Can't log!", e);
 		}
 	}
 }

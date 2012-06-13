@@ -15,6 +15,7 @@ public class LogMessage implements Parcelable {
 		this.message = message;
 	}
 
+	// --- Parcelable methods ---
 	private LogMessage(Parcel parcel) {
 		this(parcel.readInt(), parcel.readString(), parcel.readString());
 	}
