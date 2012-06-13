@@ -51,8 +51,30 @@ public class IFibServiceImpl extends IFibService.Stub {
 
 	public void asyncFib(Request request, IFibListener listener)
 			throws RemoteException {
-		Response response = fib(request);	// potentially long task
-		listener.onResponse(response);
+		Job job = new Job(request, listener);
+		job.start();
+//		Response response = fib(request); // potentially long task
+//		listener.onResponse(response);
+
 	}
 
+	class Job extends Thread {
+		Request request;
+		IFibListener listener;
+
+		Job(Request request, IFibListener listener) {
+			this.request = request;
+			this.listener = listener;
+		}
+
+		public void run() {
+			try {
+				Response response = fib(request); // potentially long task
+				listener.onResponse(response);
+			} catch (RemoteException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
 }

@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Log;
 
+import com.intel.fibcommon.IFibListener;
 import com.intel.fibcommon.IFibService;
 import com.intel.fibcommon.Request;
 import com.intel.fibcommon.Response;
@@ -69,6 +70,13 @@ public class FibManager {
 		} catch (RemoteException e) {
 			Log.e(TAG, "Failed to execute", e);
 			return null;
+		}
+	}
+	public void asyncFib(Request request, IFibListener listener) {
+		try {
+			fibService.asyncFib(request, listener);
+		} catch (RemoteException e) {
+			Log.e(TAG, "Failed to execute", e);
 		}
 	}
 

@@ -19,7 +19,7 @@ public class Response implements Parcelable {
 
 	@Override
 	public String toString() {
-		return String.format("fib() = %d (%d ms)", result, time);
+		return String.format("%d (%d ms)", result, time);
 	}
 
 	// --- Parcelable methods ---
