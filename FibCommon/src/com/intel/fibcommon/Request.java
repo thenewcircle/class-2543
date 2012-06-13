@@ -4,6 +4,12 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Request implements Parcelable {
+	public static final int JAVA_RECURSIVE = 1;
+	public static final int JAVA_ITERATIVE = 2;
+	public static final int NATIVE_RECURSIVE = 3;
+	public static final int NATIVE_ITERATIVE = 4;
+	
+	
 	private int algorithm;
 	private long n;
 
@@ -14,7 +20,7 @@ public class Request implements Parcelable {
 	}
 
 	// --- Parcelable methods ---
-	public Request(Parcel parcel) {
+	private Request(Parcel parcel) {
 		this(parcel.readInt(), parcel.readLong());
 	}
 
