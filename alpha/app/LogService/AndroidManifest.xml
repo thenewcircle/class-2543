@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.intel.logservice"
+    android:versionCode="1"
+    android:versionName="1.0"
+    android:sharedUserId="android.uid.system" >
+
+    <permission
+        android:name="com.intel.logservice.ACCESS"
+        android:label="Access to Log Service"
+        android:protectionLevel="signature" >
+    </permission>
+
+    <application>
+        <uses-library android:name="com.intel.logcommon" android:required="true"/>
+        <service
+            android:name=".LogService"
+            android:permission="com.intel.logservice.ACCESS" >
+            <intent-filter>
+                <action android:name="com.intel.logcommon.ILogService" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
