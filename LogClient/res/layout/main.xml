@@ -16,19 +16,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Debug" />
+            android:text="@string/debug" />
 
         <RadioButton
             android:id="@+id/radio_warn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Warning" />
+            android:text="@string/warning" />
 
         <RadioButton
             android:id="@+id/radio_error"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Error" />
+            android:text="@string/error" />
     </RadioGroup>
 
     <TextView
@@ -39,7 +39,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="15dp"
-        android:text="Tag"
+        android:text="@string/tag"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -57,7 +57,7 @@
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/priority"
         android:layout_marginTop="24dp"
-        android:text="Message"
+        android:text="@string/message"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -67,7 +67,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="onClickLog"
-        android:text="Log!" />
+        android:text="@string/log" />
 
     <EditText
         android:id="@+id/message"
